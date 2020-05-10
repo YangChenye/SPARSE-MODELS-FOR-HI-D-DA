@@ -15,7 +15,7 @@
 clear ; clc;
 
 image_list = {
-    'yang_l_1126.png'
+    'car_l_43.png'
     };
 for i = 1:size(image_list,1)
     fn_full = fullfile(sprintf('Data/Testing/%s_res.png',image_list{i}(1:end-4)));
@@ -32,7 +32,7 @@ for i = 1:size(image_list,1)
     maxIter = 20;                   % if 0, do not use backprojection
 
     % load dictionary
-    load('Dictionary/D_4320_0.15_5.mat');
+    load('Dictionary/yang/D_4320_0.15_5.mat');
 
     % change color space, work on illuminance only
     im_l_ycbcr = rgb2ycbcr(im_l);
@@ -43,7 +43,7 @@ for i = 1:size(image_list,1)
     % image super-resolution based on sparse representation
     [im_h_y] = ScSR(im_l_y, up_scale, Dh, Dl, lambda, overlap);
     [im_h_y] = ScSR(im_h_y, up_scale, Dh, Dl, lambda, overlap);
-    [im_h_y] = ScSR(im_h_y, up_scale, Dh, Dl, lambda, overlap);
+    % [im_h_y] = ScSR(im_h_y, up_scale, Dh, Dl, lambda, overlap);
     [im_h_y] = backprojection(im_h_y, im_l_y, maxIter);
 
     % upscale the chrominance simply by "bicubic" 
